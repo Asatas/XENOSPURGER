@@ -1,0 +1,14 @@
+#@retail@
+## Interface: 80300
+#@end-retail@
+#@non-retail@
+# ## Interface: 11304
+#@end-non-retail@
+## Version: @project-version@
+## Title: XenosPurger
+## Notes: Purge indiscriminately
+## Author: Asatas
+## SavedVariables: XENOSPURGERDB
+
+
+XENOSPURGER.lua
