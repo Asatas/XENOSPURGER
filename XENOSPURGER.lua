@@ -7,7 +7,8 @@ local XPs = {
 	". SUFFER NOT THE XENO TO LIVE!",
 	". BURN THE HERETIC!",
 	". KILL THE MUTANT!",
-	". IN THE EMPEROR'S NAME, LET NONE SURVIVE!"
+	". IN THE EMPEROR'S NAME, LET NONE SURVIVE!",
+	". FOR THE IMPERIVM OF MAN!"
 }
 
 local defaults = {
@@ -42,43 +43,33 @@ local function RestoreLink(s)
 	return hyperlinks[n]
 end
 
-local makeXP = SendChatMessage
+local makexp = SendChatMessage
 
 function SendChatMessage(msg, ...)
 	if db.enabled then
 		wipe(hyperlinks)
 		local XP = XPs[random(#XPs)]
-		local whatsthis = random(10)
-		-- tempowawiwy wepwace winks wif XPs
+		local whatsthis = random(2)
+
 		local s = msg:gsub("|c.-|r", ReplaceLink)
 		s = string.upper(s)
-		s = s .. XP
-
-		-- y-you awe such a b-baka
 		s = format(" %s ", s)
-		for k in gmatch(s, "%a+") do
-			if random(10) == 1 then
-				local firstChar = k:sub(1, 1)
-				s = s:gsub(format(" %s ", k), format(" %s-%s ", firstChar, k))
-			end
-		end
 		s = s:trim()
-		s = whatsthis == 1 and s.." "..XP or s:gsub("!$", " "..XP)
-		-- pwease PURGE wesponsibwy
+		s = whatsthis == 1 and s..XP or s:gsub("!$", XP)
 		s = #s <= 255 and s:gsub("XP%d", RestoreLink) or msg
-		makeXP(s, ...)
+		makexp(s, ...)
 	else
-		makeXP(msg, ...)
+		makexp(msg, ...)
 	end
 end
 
 local EnabledMsg = {
-	[true] = "|cffADFF2FPURGING|r",
-	[false] = "|cffFF2424NOT PURGING|r",
+	[true] = "|cffADFF2FEnabwed|r",
+	[false] = "|cffFF2424Disabwed|r",
 }
 
-SLASH_XENOSPURGER1 = "/XP"
-SLASH_XENOSPURGER2 = "/XENOSPURGER"
+SLASH_XENOSPURGER1 = "/xp"
+SLASH_XENOSPURGER2 = "/xp2"
 
 SlashCmdList.XENOSPURGER = function()
 	db.enabled = not db.enabled
